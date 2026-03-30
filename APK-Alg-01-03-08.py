@@ -10,12 +10,19 @@ notas_base = {
 
 nota_entrada = input("Digite uma nota (ex: C4, A5, G3): ").upper()
 
-letra = nota_entrada[0]
-oitava = int(nota_entrada[1])
-
-if letra in notas_base:
-    frequencia_base = notas_base[letra]
-    frequencia = frequencia_base * (2 ** (oitava - 4))
-    print(f"A nota {nota_entrada} tem frequência de {frequencia:.2f} Hz")
+if len(nota_entrada) < 2:
+    print("Entrada inválida! Use formato: C4, A5, etc")
 else:
-    print("Nota inválida!")
+    letra = nota_entrada[0]
+    
+    try:
+        oitava = int(nota_entrada[1])
+        
+        if letra in notas_base:
+            frequencia_base = notas_base[letra]
+            frequencia = frequencia_base * (2 ** (oitava - 4))
+            print(f"A nota {nota_entrada} tem frequência de {frequencia:.2f} Hz")
+        else:
+            print(f"Nota '{letra}' inválida! Use: C, D, E, F, G, A ou B")
+    except ValueError:
+        print("Oitava deve ser um número!")
